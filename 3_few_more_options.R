@@ -23,7 +23,7 @@ iris |>
   ggplot(aes(x = Species, y = Sepal.Length)) + 
   geom_jitter(aes(color = Species)))
 
-# summary statistics
+# summary statistics (defaults to mean)
 iris_jitter+ 
   stat_summary()
 
@@ -52,4 +52,22 @@ iris |>
   geom_jitter()
 
 # maybe we'd want some other arrangment of the dots here...
+
+###  COLORS#####
+
+# map color to continuous value, as well as discrete
+cars_plot + 
+  geom_point(aes(color = qsec))
+
+
+# can also choose our gradient
+
+# https://ggplot2.tidyverse.org/reference/scale_gradient.html
+
+# note how we have to set the midpoint manually 
+mtcars |> 
+  ggplot( aes(x = wt, y = hp)) +
+  geom_point(aes(colour = drat)) + 
+  scale_colour_gradient2(midpoint = mean(mtcars$drat))
+
 

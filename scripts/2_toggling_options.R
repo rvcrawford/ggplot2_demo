@@ -1,5 +1,6 @@
 #### 2. SOME OPTIONS #######
 
+
 # adjust theme
 iris_plot + 
   theme_bw()
