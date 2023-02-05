@@ -4,6 +4,15 @@
 iris_plot + 
   theme_bw()
 
+iris_plot + 
+  theme_classic()
+
+# add a title
+
+# NOTE LINE BREAK IN SUBTITLE
+iris_plot + 
+  labs(title = "My Awesome Iris Plot", subtitle = "Data Visualization \nis My Passion")
+
 # adjust theme + size
 
 iris_plot + 
@@ -21,7 +30,7 @@ iris_plot +
 iris_plot +
   theme(legend.position = c(0.9, 0.8))
 
-# turn off legend position
+# turn off legend
 iris_plot + 
   theme(legend.position='none')
 
@@ -53,6 +62,19 @@ iris_plot +
 iris_plot + 
   geom_smooth(aes(x = Sepal.Width, y = Sepal.Length))
 
+# doesn't work
+
+# but the following works 
+iris |> 
+  ggplot(aes(x = Sepal.Width, y = Sepal.Length)) + 
+  # modifying shapes
+  geom_point(aes(col = Species)) + 
+  # turned off standard errors
+  # modified line type argument
+  # made it big
+  # note that this is kind of silly
+  geom_smooth(method = "lm")
+
 
 # modfiying a bunch of parameters 
 
@@ -64,15 +86,16 @@ iris |>
   # turned off standard errors
   # modified line type argument
   # made it big
-  # note that this is kind of silly
+  # kind of silly
   geom_smooth(method = "lm", se = F, lty = 4, color = "darkblue", size = 3)
 
 
 # one more for good measure...
-
-
 # using shape to distinguish between species...
+
 iris |> 
   ggplot(aes(x = Sepal.Width, y = Sepal.Length)) + 
   # modifying shapes
   geom_point(aes(shape = Species))
+
+

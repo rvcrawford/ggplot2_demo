@@ -17,9 +17,9 @@ plot(mtcars$wt, mtcars$hp)
 mtcars |> 
   ggplot(aes(wt, hp))
 
-cars_plot <- mtcars |> 
+(cars_plot <- mtcars |> 
   ggplot(aes(wt, hp)) + 
-  geom_point()
+  geom_point())
 
 #Q: Why doesn't the following work? 
 
