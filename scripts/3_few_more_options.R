@@ -59,15 +59,21 @@ iris |>
 cars_plot + 
   geom_point(aes(color = qsec))
 
+# we can assign colors manually
+iris |> 
+  ggplot(aes(x = Species, y = Sepal.Length))+
+  geom_jitter(aes(color = Species)) +
+  scale_color_manual(values = c("red", "blue", "green"))
 
-# can also choose our gradient
+# vector of colors, taken from https://colorbrewer2.org
+my_col <- c('#7fc97f','#beaed4','#fdc086')
 
-# https://ggplot2.tidyverse.org/reference/scale_gradient.html
+iris |> 
+  ggplot(aes(x = Species, y = Sepal.Length))+
+  geom_jitter(aes(color = Species)) +
+  scale_color_manual(values = my_col)
 
-# note how we have to set the midpoint manually 
-mtcars |> 
-  ggplot( aes(x = wt, y = hp)) +
-  geom_point(aes(colour = drat)) + 
-  scale_colour_gradient2(midpoint = mean(mtcars$drat))
+# can also choose a gradient (shown later)
+
 
 
