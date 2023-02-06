@@ -5,15 +5,15 @@ my_pk <- function(pkg){
   return(lsf.str(paste("package:", pkg, sep = "")) |> as.vector())
 }
 
-out <- tids |> purrr::map(my_pk)
-
 tt <- tibble(pkg_name = tids) |> 
   mutate(fns = map(pkg_name, my_pk)) |> 
   unnest(fns)
 
 tt |> head()
 
-tt |> filter(str_detect(fns, "^geom"))
+# just to take a look
+tt |> 
+  filter(str_detect(fns, "^geom"))
 
 tt |> 
   count(pkg_name) |>
@@ -22,7 +22,8 @@ tt |>
 
 tt |> 
   count(pkg_name) |>
-      ggplot(aes(x = fct_reorder(pkg_name,-n), y = n)) + 
+  # use fct_reorder to reorder x axis in descending order by n
+      ggplot(aes(x = fct_reorder(pkg_name,desc(n)), y = n)) + 
       geom_point(color = "red", size = 2, shape = 12) + 
       theme_dark(18)
 
