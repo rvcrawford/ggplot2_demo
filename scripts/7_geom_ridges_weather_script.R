@@ -29,16 +29,19 @@ ith_weather <- ith_22 |>
     STATION, 
     DATE, 
     mean_temp = rowMeans(across(c(TMAX, TMIN))), 
+    # extract month as label from this
     month = lubridate::month(DATE, label = T, abbr = F))
 
 
-ggplot(ith_weather, aes(x = mean_temp, y = month, fill = stat(x))) +
+ggplot(ith_weather, aes(x = mean_temp, y = month, fill = after_stat(x))) +
   geom_density_ridges_gradient(scale = 3, rel_min_height = 0.01) +
-  scale_fill_viridis_c(name = "Temp. [F]", option = "C") +
+  #### note use of expression so I could use degree symbol##
+  scale_fill_viridis_c(name = expression("Temp"~degree~"F"), option = "C") +
   labs(title = 'Temperatures in Ithaca NY in 2022') + 
-  theme_ridges() + 
+  theme_bw() + 
   ylab("Month") + 
   xlab("Mean Temperature")
+<<<<<<< HEAD:scripts/weather_script.R
 
 
 ggplot(ith_weather, aes(x = mean_temp, y = month, fill = stat(x))) +
@@ -56,3 +59,6 @@ ggplot(ith_weather, aes(x = mean_temp, y = month, fill = stat(x))) +
 #   geom_density_ridges_gradient(scale = 3, rel_min_height = 0.01) +
 #   scale_fill_viridis_c(name = "Temp. [F]", option = "C") +
 #   labs(title = 'Temperatures in Ithaca NY in 2022')
+=======
+        
+>>>>>>> 827c01f40b7516db5ec3a67b909d481c90ca7e2b:scripts/7_geom_ridges_weather_script.R
