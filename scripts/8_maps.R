@@ -4,7 +4,7 @@ library(sf)
 # contains maps
 library(maps)
 
-# sf lets you match up projections etc.
+# sf lets you match up projections etc. 
 states <- st_as_sf(map("state", plot = FALSE, fill = TRUE))
 
 # plot whole US
@@ -26,5 +26,6 @@ ggplot(data = states |> filter(ID %in% st_of_int)) +
 
 ggplot(data = states) +
   geom_sf(fill = "lightblue") + 
+  # note use of coordinate boxes
   coord_sf(xlim = c(-84, -69), ylim = c(38, 46), expand = FALSE) 
 

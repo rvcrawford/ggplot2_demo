@@ -1,25 +1,42 @@
 library(tidyverse)
 library(janitor)
 
-nir_times <- read_csv("./input_data/nir_times/nir_time.csv", skip = 11)
+
+
+nir_times <- read_csv("./input_data/nir_times/nir_time.csv", 
+                      # note use of skipping rows
+                      skip = 11)
+
+# if not, we get this mess
+read_csv("./input_data/nir_times/nir_time.csv", 
+     skip = 0)
+
+# our tibble contains some messy names.
+head(nir_times)
 
 # bunch of preparatory stuff to get ready to plot
 times_to_plot <- nir_times |> 
   clean_names() |> 
   select(1:7) |> 
   # cleaning up time data
-  mutate(ith_run = 1:n(), date = lubridate::mdy(date),
-         date_time = parse_datetime(paste(date, time), locale = locale(tz = "US/Eastern"))
+  mutate(ith_run = 1:n(), 
+         date = lubridate::mdy(date),
+         # make date time, force computer to recognize
+         # correct timezone
+         date_time = parse_datetime(paste(date, time), 
+              locale = locale(tz = "US/Eastern"))
          ) |> 
   group_by(date) |> 
-  # calculate time to run next sample
+  # calculate lag between samples
   mutate(time_between = time - lag(time))
 
 # times_to_plot |> filter(time_between>6000)
 
-# we've got a GIANT OUTLIER!
+# we've got a GIANT OUTLIER! (Thursday, Jan 26, ~ 11 - 1 pm)
+# does anybody want to guess what it is?
 times_to_plot |>
-  ggplot(aes(ith_run, time_between)) + geom_point()
+  ggplot(aes(ith_run, time_between)) + 
+  geom_point()
 
 # somewhat silly
 # times_to_plot |> 
@@ -30,12 +47,14 @@ times_to_plot |>
 
 (time_plot <- times_to_plot |>
   filter(time_between < 6000, date < "2023-01-30") |>
+    # need to use as_hms to get something nicely plottable
   ggplot(aes(ith_run, hms::as_hms(time_between))) +
   geom_line() + 
   theme_bw() + 
   ylab("Lag Between Samples (Minutes)") + 
   xlab("Number of Samples Run") +
-  labs(title = "Time Lag Between Scanned NIR Samples", subtitle = "Peaks are breaks to clean cells"))
+  labs(title = "Time Lag Between Scanned NIR Samples", 
+       subtitle = "Peaks are breaks to clean cells"))
 
 
 (ttp1 <- times_to_plot |>

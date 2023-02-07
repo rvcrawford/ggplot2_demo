@@ -1,11 +1,11 @@
-# plot points
+# plot points by species
 iris |> 
   ggplot(aes(x = Species, y = Sepal.Length)) + 
   geom_point()
 
 ######### POTENTIAL OVERPLOTTING! ######
 
-# how to deal with that
+# how to deal with that?
 
 # adjusting alpha level
 iris |> 
@@ -23,7 +23,7 @@ iris |>
   ggplot(aes(x = Species, y = Sepal.Length)) + 
   geom_jitter(aes(color = Species)))
 
-# summary statistics (defaults to mean)
+# summary statistics (defaults to mean and SE)
 iris_jitter+ 
   stat_summary()
 
@@ -51,7 +51,7 @@ iris |>
   geom_violin() + 
   geom_jitter()
 
-# maybe we'd want some other arrangment of the dots here...
+# maybe we'd want some other arrangement of the dots here...
 
 ###  COLORS#####
 
@@ -66,11 +66,13 @@ iris |>
   scale_color_manual(values = c("red", "blue", "green"))
 
 # vector of colors, taken from https://colorbrewer2.org
+# maybe th
 my_col <- c('#7fc97f','#beaed4','#fdc086')
 
 iris |> 
   ggplot(aes(x = Species, y = Sepal.Length))+
   geom_jitter(aes(color = Species)) +
+  # pass in vector of colors
   scale_color_manual(values = my_col)
 
 # can also choose a gradient (shown later)

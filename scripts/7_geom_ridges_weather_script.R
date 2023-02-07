@@ -13,6 +13,7 @@ ith_22 |>
   distinct(STATION)
 # we have four stations
 
+# look at how much data we have from each station.
 ith_22 |> 
   group_by(STATION) |> 
   summarize(sum(is.na(TMIN)), sum(is.na(TMAX)))
@@ -28,14 +29,19 @@ ith_weather <- ith_22 |>
   transmute(
     STATION, 
     DATE, 
+    ########  note use of across and rowMeans() (trivial here ##
+    ## but useful with more columns) ##
     mean_temp = rowMeans(across(c(TMAX, TMIN))), 
     # extract month as label from this
     month = lubridate::month(DATE, label = T, abbr = F))
 
+head(ith_weather)
 
 ggplot(ith_weather, aes(x = mean_temp, y = month, fill = after_stat(x))) +
+  # use of density_ridges
   geom_density_ridges_gradient(scale = 3, rel_min_height = 0.01) +
-  #### note use of expression so I could use degree symbol##
+  #### note use of expression() so I could use degree symbol##
+  # also use of viridis color palette #
   scale_fill_viridis_c(name = expression("Temp"~degree~"F"), option = "C") +
   labs(title = 'Temperatures in Ithaca NY in 2022') + 
   theme_bw() + 

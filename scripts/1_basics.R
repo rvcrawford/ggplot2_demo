@@ -27,7 +27,7 @@ mtcars %>%
   ggplot(aes(wt, hp)) + 
   geom_point()
 
-# A: "%>%" comes from maggrittr, which we did not load (would have loaded with library(tidyverse),
+# A: "%>%" comes from magrittr, which we did not load (would have loaded with library(tidyverse),
 # if we did this, we would also need to use a "." before "aes" in the ggplot() call)
 
 
@@ -43,6 +43,7 @@ mtcars %>%
     ggplot(aes(x = Species, y = Petal.Length)) + 
     geom_boxplot())
 
+# boxplot color coded by species--but something doesn't look quite right!
 (iris_hist <- iris |> 
   ggplot(aes( x = Petal.Length, col = Species)) + 
   geom_histogram())
@@ -51,5 +52,5 @@ mtcars %>%
 (iris_hist <- iris |> 
     # note only x supplied, used "fill" argument to specify filling the histogram
     ggplot(aes( x = Petal.Length, fill = Species)) + 
-    # adjusted
+    # adjusted number of bins
     geom_histogram(bins = 20))

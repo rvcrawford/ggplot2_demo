@@ -8,11 +8,16 @@ nurs_data <- read_csv("./input_data/nursery_data_2019/plot_means.csv") |>
   rename(rng = range) |> 
   select(rng, row, leaf_hgt_2020)
 
+head(nurs_data)
+
 nurs_plan <- read_csv("./input_data/nursery_data_2019/field_plan.csv") |> 
   rename(population = blk) |> 
   select(-old_plant_no)
 
+head(nurs_plan)
+
 nurs_2 <- left_join(nurs_plan, nurs_data) |> 
+  # convert replication to character to fit model
   mutate_at(vars(rep), as.character)
 
 head(nurs_2)
@@ -21,13 +26,17 @@ mod <- lm(leaf_hgt_2020 ~ rng + row + hs, data = nurs_2)
 summary(aov(mod))
 
 nurs_3 <- nurs_2 |> 
+  # use transmute to only keep relevant variables
   transmute(rng, row, rep, resid = mod$residuals)
+
+head(nurs_3)
 
 ######## moisture gradient within a field
 
 # finally, make our plot
 nurs_3 |> 
   ggplot(aes(x = row, y = rng)) + 
+  # use geom_tile to make heatmaps
   geom_tile(aes(fill = resid)) + 
   # lets make a gradient
   # we need to supply a value for our gradient

@@ -10,11 +10,12 @@ iris_plot +
 
 # add a title
 
-# NOTE LINE BREAK IN SUBTITLE
+# NOTE LINE BREAK IN SUBTITLE "\n"
 iris_plot + 
-  labs(title = "My Awesome Iris Plot", subtitle = "Data Visualization \nis My Passion")
+  labs(title = "My Awesome Iris Plot", 
+       subtitle = "Data Visualization \nis My Passion")
 
-# adjust theme + size
+# adjust theme size
 
 iris_plot + 
   theme_bw(24)
@@ -43,7 +44,8 @@ iris_plot +
 iris_plot + 
   theme(text=element_text(family="Palantino"))
 
-# my impression is that there may be differences in this stuff depending on your OS.
+# my impression is that there may be differences in this stuff 
+# depending on your OS.
 
 ##### adding lines/ smoothers
 
@@ -63,17 +65,12 @@ iris_plot +
 iris_plot + 
   geom_smooth(aes(x = Sepal.Width, y = Sepal.Length))
 
-# doesn't work
+# doesn't work (I believe) because we've told ggplot that Species will be a grouping variable at the global level of the plot
 
 # but the following works 
 iris |> 
   ggplot(aes(x = Sepal.Width, y = Sepal.Length)) + 
-  # modifying shapes
   geom_point(aes(col = Species)) + 
-  # turned off standard errors
-  # modified line type argument
-  # made it big
-  # note that this is kind of silly
   geom_smooth(method = "lm")
 
 

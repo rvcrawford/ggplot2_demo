@@ -28,7 +28,9 @@ emmeans::emmeans(mod2, "entry2") |>
   geom_point() +
   #NOTE ERRORBAR, LCL and UCL
   geom_errorbar(aes(ymin = lower.CL, ymax = upper.CL)) +
+  # tried yet another theme
   theme_light() + 
+  ######## adjusting axis labels ###########
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   ylab("Yield (Dry Tons Per Acre)") +
   xlab("Cultivar")
