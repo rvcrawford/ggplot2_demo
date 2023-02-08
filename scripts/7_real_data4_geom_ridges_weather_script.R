@@ -44,6 +44,8 @@ ggplot(ith_weather, aes(x = mean_temp, y = month, fill = after_stat(x))) +
   geom_density_ridges_gradient(scale = 3, rel_min_height = 0.01) +
   #### note use of expression() so I could use degree symbol##
   # also use of viridis color palette #
+  # additional note: had a problem rendering the degree symbol until
+  # I switched the plotting backend to Cairo (not sure what that means)
   scale_fill_viridis_c(name = expression("Temp"~degree~"F"), option = "C") +
   labs(title = 'Temperatures in Ithaca NY in 2022') + 
   theme_bw() + 

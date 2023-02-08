@@ -8,6 +8,8 @@ library(plotly)
 # sf lets you match up projections etc. 
 states <- st_as_sf(map("state", plot = FALSE, fill = TRUE))
 
+head(states)
+
 # plot whole US
 ggplot(data = states) +
   # plots our shape
@@ -36,6 +38,8 @@ data(us.cities)
 
 # get some points
 cities <-  st_as_sf(us.cities, coords = c("long", "lat"), remove = F,crs = 4326,agr = "constant")
+
+head(cities)
 
 # add cities in our box
 (ne_map2 <- ggplot(data = states) +
