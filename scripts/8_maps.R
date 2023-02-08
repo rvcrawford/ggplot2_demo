@@ -19,7 +19,7 @@ st_of_int <- c("new york", "pennsylvania", "ohio", "new jersey")
 
 ggplot(data = states2 |> filter(ID %in% st_of_int)) +
   geom_sf(fill = "pink") + 
-  # turn off coordinates
+  # turn off just about everything
   theme_void() +
   geom_text(data = states2 |> filter(ID %in% st_of_int), aes(X, Y, label = ID))
 

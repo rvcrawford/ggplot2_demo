@@ -48,6 +48,7 @@ times_to_plot |>
   filter(time_between < 6000, date < "2023-01-30") |>
     # need to use as_hms to get something nicely plottable
   ggplot(aes(ith_run, hms::as_hms(time_between))) +
+    # need text for ggplotly #
   geom_line(aes(text = time)) + 
   theme_bw() + 
   ylab("Lag Between Samples (Minutes)") + 

@@ -2,7 +2,7 @@
 
 # Q. Why bother? base-R is fine.
 
-# A. Can you make a pretty base R plot?  Some people can, but I can't.
+# A. Can you make a pretty base R plot?  Some people can, but not me.
 
 # ggplot is pretty much ubiquitous (even if you don't like tidyverse), 
 # plays very well with tidyverse, an easy way to learn to do a lot of stuff 
@@ -16,6 +16,9 @@ data(iris)
 
 # in base R
 plot(mtcars$wt, mtcars$hp)
+
+# save a few characters with
+with(mtcars, plot(wt, hp))
 
 ####### ggplot 2 ########3
 
@@ -51,7 +54,7 @@ mtcars %>%
     ggplot(aes(x = Species, y = Petal.Length)) + 
     geom_boxplot())
 
-# boxplot color coded by species--but something doesn't look quite right!
+# histogram color coded by species--but something doesn't look quite right!
 (iris_hist <- iris |> 
   ggplot(aes( x = Petal.Length, col = Species)) + 
   geom_histogram())

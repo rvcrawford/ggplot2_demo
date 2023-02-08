@@ -13,7 +13,7 @@ ith_22 |>
   distinct(STATION)
 # we have four stations
 
-# look at how much data we have from each station.
+# look at how much data we have from each station by tallying missing (NA) data
 ith_22 |> 
   group_by(STATION) |> 
   summarize(sum(is.na(TMIN)), sum(is.na(TMAX)))
@@ -37,6 +37,7 @@ ith_weather <- ith_22 |>
 
 head(ith_weather)
 
+# don't fully understand use of after_stat
 ggplot(ith_weather, aes(x = mean_temp, y = month, fill = after_stat(x))) +
   # use of density_ridges
   geom_density_ridges_gradient(scale = 3, rel_min_height = 0.01) +

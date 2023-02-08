@@ -10,9 +10,9 @@ iris_plot +
 
 # add a title
 
-# NOTE LINE BREAK IN SUBTITLE "\n"
 iris_plot + 
   labs(title = "My Awesome Iris Plot", 
+       # NOTE LINE BREAK IN SUBTITLE "\n"
        subtitle = "Data Visualization \nis My Passion")
 
 # adjust theme size
@@ -22,7 +22,7 @@ iris_plot +
 
 # adjust legend position
 
-# (helpful page for this)
+# (very helpful page for how to adjust these parameters)
 # http://www.sthda.com/english/wiki/ggplot2-legend-easy-steps-to-change-the-position-and-the-appearance-of-a-graph-legend-in-r-software
 
 iris_plot + 
