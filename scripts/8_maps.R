@@ -40,8 +40,9 @@ cities <-  st_as_sf(us.cities, coords = c("long", "lat"), remove = F,crs = 4326,
 # add cities in our box
 (ne_map2 <- ggplot(data = states) +
   geom_sf(fill = "lightblue") + 
-  geom_sf(data = cities)+ 
-  geom_point(data = us.cities, aes(long, lat, text = name), colour="red", alpha=1/2)+
+  geom_sf(data = cities) + 
+    # note that "text" gives us our tooltip
+  geom_point(data = us.cities, aes(x = long, y = lat, text = name), colour="red", alpha=1/2)+
   # note use of coordinate boxes
   coord_sf(xlim = c(-84, -69), ylim = c(38, 46), expand = FALSE))
 

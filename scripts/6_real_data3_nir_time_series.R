@@ -1,18 +1,19 @@
 library(tidyverse)
 library(janitor)
-
+library(plotly)
 
 
 nir_times <- read_csv("./input_data/nir_times/nir_time.csv", 
                       # note use of skipping rows
                       skip = 11)
 
-# if not, we get this mess
+# our tibble contains some messy names.
+head(nir_times)
+
+# if we aren't skipping lines, we get this mess
 read_csv("./input_data/nir_times/nir_time.csv", 
      skip = 0)
 
-# our tibble contains some messy names.
-head(nir_times)
 
 # bunch of preparatory stuff to get ready to plot
 times_to_plot <- nir_times |> 
@@ -29,8 +30,6 @@ times_to_plot <- nir_times |>
   group_by(date) |> 
   # calculate lag between samples
   mutate(time_between = time - lag(time))
-
-# times_to_plot |> filter(time_between>6000)
 
 # we've got a GIANT OUTLIER! (Thursday, Jan 26, ~ 11 - 1 pm)
 # does anybody want to guess what it is?
@@ -49,14 +48,17 @@ times_to_plot |>
   filter(time_between < 6000, date < "2023-01-30") |>
     # need to use as_hms to get something nicely plottable
   ggplot(aes(ith_run, hms::as_hms(time_between))) +
-  geom_line() + 
+  geom_line(aes(text = time)) + 
   theme_bw() + 
   ylab("Lag Between Samples (Minutes)") + 
   xlab("Number of Samples Run") +
   labs(title = "Time Lag Between Scanned NIR Samples", 
        subtitle = "Peaks are breaks to clean cells"))
 
+# make into a plotly, use a tool tip
+(plotly_fig <- ggplotly(time_plot))
 
+# try a plot by operator
 (ttp1 <- times_to_plot |>
   filter(time_between < 6000, date < "2023-01-30") |>
   ggplot(aes(ith_run, hms::as_hms(time_between), color = operator)) +
