@@ -1,5 +1,13 @@
 #### 1. BASICS #######
 
+# Q. Why bother? base-R is fine.
+
+# A. Can you make a pretty base R plot?  Some people can, but I can't.
+
+# ggplot is pretty much ubiquitous (even if you don't like tidyverse), 
+# plays very well with tidyverse, an easy way to learn to do a lot of stuff 
+# quickly.
+
 library(ggplot2)
 
 # load datasets
