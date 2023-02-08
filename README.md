@@ -1,2 +1,2 @@
 # myrepo
-Repository for testing my Git/GitHub setup
+Repository containing ggplot demo code
