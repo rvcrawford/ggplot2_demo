@@ -8,16 +8,20 @@
 # plays very well with tidyverse, an easy way to learn to do a lot of stuff 
 # quickly.
 
+# note that I'm not loading the entire tidyverse
 library(ggplot2)
 
 # load datasets
 data(mtcars)
 data(iris)
 
+head(iris)
+head(mtcars)
+
 # in base R
 plot(mtcars$wt, mtcars$hp)
 
-# save a few characters with
+# save a few characters with:
 with(mtcars, plot(wt, hp))
 
 ####### ggplot 2 ########3

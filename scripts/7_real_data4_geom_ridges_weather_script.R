@@ -10,6 +10,7 @@ head(ith_22)
 
 
 ith_22 |> 
+  # very handy tidyverse verb
   distinct(STATION)
 # we have four stations
 
@@ -47,4 +48,5 @@ ggplot(ith_weather, aes(x = mean_temp, y = month, fill = after_stat(x))) +
   labs(title = 'Temperatures in Ithaca NY in 2022') + 
   theme_bw() + 
   ylab("Month") + 
-  xlab("Mean Temperature")
+  xlab("Daily Mean Temperature")
+

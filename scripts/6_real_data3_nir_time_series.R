@@ -21,6 +21,7 @@ times_to_plot <- nir_times |>
   select(1:7) |> 
   # cleaning up time data
   mutate(ith_run = 1:n(), 
+         ### lubridate makes working with dates much easier!###
          date = lubridate::mdy(date),
          # make date time, force computer to recognize
          # correct timezone
@@ -28,8 +29,11 @@ times_to_plot <- nir_times |>
               locale = locale(tz = "US/Eastern"))
          ) |> 
   group_by(date) |> 
-  # calculate lag between samples
+  # calculate lag between samples (another tidyverse function)
   mutate(time_between = time - lag(time))
+
+# how do the data look?
+head(times_to_plot)
 
 # we've got a GIANT OUTLIER! (Thursday, Jan 26, ~ 11 - 1 pm)
 # does anybody want to guess what it is?
@@ -68,6 +72,7 @@ times_to_plot |>
 ttp1 +
   # FACET WRAPPING BY DAY, SHOW DIFFERENCES BY DAY
   # Note how we set scales to free
+  # not a great plot, mostly wanted to demo faceting and free scales...
   facet_wrap(vars(date), ncol = 4, scales = "free_x")
 
 # BUT let's capitalize our names
@@ -75,7 +80,6 @@ ttp1 +
 ttp1 + 
   facet_wrap(vars(date), ncol = 4, scales = "free_x") +
   scale_color_discrete(labels=c("Ryan", "Miguel"))
-# pretty good
 
 
 

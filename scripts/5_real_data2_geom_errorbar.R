@@ -3,8 +3,10 @@ library(lme4)
 library(lmerTest)
 
 swg <- read_csv("./input_data/swg_yield/new_york_seeded_plot_yields_2020_2021_2022.csv") |>
+  # setting year, rep as character because they are discrete variables
   mutate_at(vars(rep, year), as.character)
 
+### yield summary ###
 yld_sum <- swg |>
   group_by(year, entry2) |>
   summarize_at(vars(yld_dta), mean)

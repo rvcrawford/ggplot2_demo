@@ -15,7 +15,7 @@ iris_plot +
        # NOTE LINE BREAK IN SUBTITLE "\n"
        subtitle = "Data Visualization \nis My Passion")
 
-# adjust theme size
+## adjust theme size
 
 iris_plot + 
   theme_bw(24)
@@ -81,8 +81,8 @@ iris |>
   ggplot(aes(x = Sepal.Width, y = Sepal.Length)) + 
   # modifying shapes
   geom_point(aes(col = Species), shape = 4) + 
-  # turned off standard errors
-  # modified line type argument
+  # turned off standard errors ("se = F")
+  # modified line type argument ("lty")
   # made it big
   # kind of silly
   geom_smooth(method = "lm", se = F, lty = 4, color = "darkblue", size = 3)

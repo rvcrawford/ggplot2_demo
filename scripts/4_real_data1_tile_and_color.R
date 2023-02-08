@@ -16,8 +16,9 @@ nurs_plan <- read_csv("./input_data/nursery_data_2019/field_plan.csv") |>
 
 head(nurs_plan)
 
+# use left_join here
 nurs_2 <- left_join(nurs_plan, nurs_data) |> 
-  # convert replication to character to fit model
+  # convert replication to character to fit model via mutate_at()
   mutate_at(vars(rep), as.character)
 
 head(nurs_2)
