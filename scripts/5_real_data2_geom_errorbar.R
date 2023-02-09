@@ -6,6 +6,8 @@ swg <- read_csv("./input_data/swg_yield/new_york_seeded_plot_yields_2020_2021_20
   # setting year, rep as character because they are discrete variables
   mutate_at(vars(rep, year), as.character)
 
+head(swg)
+
 ### yield summary ###
 yld_sum <- swg |>
   group_by(year, entry2) |>

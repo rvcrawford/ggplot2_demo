@@ -70,6 +70,7 @@ iris_plot +
 # but the following works 
 iris |> 
   ggplot(aes(x = Sepal.Width, y = Sepal.Length)) + 
+  # applies additional aesthetic for color at the "point" level
   geom_point(aes(col = Species)) + 
   geom_smooth(method = "lm")
 
